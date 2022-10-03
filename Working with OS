@@ -1,0 +1,50 @@
+
+# Author: Alisha Boughton
+# Date: September 30, 2022
+
+#This week we will create a program that performs file processing activities.
+#Your program this week will use the OS library in order to validate that a directory exists before creating a file in that directory. 
+#Your program will prompt the user for the directory they would like to save the file in as well as the name of the file. 
+#The program should then prompt the user for their name, address, and phone number. 
+#Your program will write this data to a comma separated line in a file and store the file in the directory specified by the user. 
+
+#Once the data has been written your program should read the file you just wrote to the file system and display the file contents to 
+#the user for validation purposes. 
+
+#Submit a link to your Github repository.
+
+#Import the OS Library.
+import os
+
+def playing_with_os():
+    #Keep running until correct directory was specified and file was written to and read.
+    while True:
+
+        #Get user input for required fields.
+        directory = input("Enter the directory that you want to save the file : ")
+        filename = input("Enter the filename : ")
+        name = input("Enter your name : ")
+        address = input("Enter your address : ")
+        phone_number = input("Enter your phone number : ")
+
+
+        #Directory validation.
+        if os.path.isdir(directory):
+
+            #Create, open, write to and close file.
+            writeFile = open(os.path.join(directory,filename),'w')
+            writeFile.write(name+','+address+','+phone_number+'\n')
+            writeFile.close()
+            print("File contents:")
+            readFile = open(os.path.join(directory,filename),'r')
+
+            for line in readFile:
+                print(line)
+            readFile.close()
+
+        #Directory validation.
+        else:
+            print("Sorry that directory does not exists.")
+            pass
+
+playing_with_os()
